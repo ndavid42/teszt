@@ -227,6 +227,8 @@ var  -  global scope (nem redeklarálható, pláne mert mindenhol elérhető, bl
 let  -  block scope (redeklarálható más blokkon belül, mivel csak oda terjed ki a hatása)
 const   -  konstans (nem redeklarálható, hiszen konstans)
 
+szövegbe ágyazott változó: console.log(`balra dőlő aposztrófok között ${valtozoNeve} ez egy változó`);
+
 -------
 loop:
 
@@ -357,15 +359,106 @@ let valtozoNegyedikNev: any = "akármi lehet, mint a js-ben";
 let valtozoOtodikNev: unknown = "dettó, csak ez kényszerít a használat előtti típusellenőrzésre"; (akkor jó, ha nem tudjuk biztosan, h milyen adat érkezik, de kell a típusvédelem) typeof vagy as string/as number konvertálás utána használható
 let email: string | null = null; //jelenleg nincs érték, adat egyelőre nincs betöltve
 
+let valasz: string | number; //union típus, elfogadja mindkettőt. használat előtt typeof típusellenőrzés!)
+
+
 ----
 tömbök:
 
 let szovegesTomb: string[] = ["egy", "kettő", "három"];
 let szamTomb. Array<number> = [512, 64, 42, 51];
 
+-----
+függvények:
+
+nincs visszatérési érték:      function funkcioNeve(): void {}
+return nélkül, paraméterrel:   function funkcioNeve(nev: string): void {}
+csak return van:               function funkcioNeve(): number { ... return 42; }
+mindkettő van:                 function funkcioNeve(darab: number, nev: string): boolean { ... return true; }
+tuple returnnal:               function funkcioNeve(nev: string): [number, string] { ... return [42, "szoveg"]; }
+
+opcionális paraméter:          function funkcioNeve(nev?: string): void { //nem kötelező megadni. ha nincs érték, undefined lesz, de nem lesz hiba }
+param default értékkel:        function funkcioNeve(nev: string = "John Doe"): void { //nem kötelező megadni, lesz alapérték}
+soha nincs visszatérés:        function funkcioNeve(nev: string): never { throw new Error(msg); }
+
+arrow:
+const osszead = (a: number, b: number): number => { return a+b; };
+
+----
+tuple: rögzített elemszámú és típuskiosztású tömb
+let user: [string, number] = ["anna", 23];
+let data: [string, number?];  //a number az opcionális
+let data: [string | number, boolean]; //többféle típus egy indexen
+
+-----
+enum: felsorolás, előre meghatározott név-érték párok. van numeric és string enum
+
+>>>numeric enum:
+enum Status {
+  OK,
+  Warning,
+  Error
+}
+console.log(Status.Warning); //eredménye: 1
+console.log(Status[1]);   //eredménye: "Warning"
+
+>>>string enum: (ha fontosabb az olvashatóság
+enum UserTipus {
+  Admin = "admin",
+  User = "user",
+  Guest = "guest"
+}
+let alap_felhasznalo: UserTipus = UserTipus.User; 
+console.log(alap_felhasznalo); // "user"
+
+let rendszergazda: UserTipus = UserTipus.Admin; 
+console.log(rendszergazda); // "admin"
+
+-----
+interface: minta (szabályrendszer), ami meghatározza az objektum szerkezetét (milyen mezők, azok milyen tipusúak, milyen metódusok tartoznak hozzá)
+
+interface Dolgozo { 
+  nev: string; 
+  eletkor: number; 
+  aktiv?: boolean;  //opcionális mező
+  readonly id: number; //csak olvasható
+  getNev(): string;
+} 
+
+var interfaceObjektum1: Dolgozo = {nev: "Teszt Elek", eletkor: 30, aktiv: true};
+console.log(interfaceObjektum1.nev);
+
+interface és osztály:
+class HR_munkatars implements Dolgozo {
+  nev: string;
+  eletkor: number;
+  aktiv: boolean;
+  constructor(nevInput: string, eletkorInput: number, aktivInput: boolean) {
+    this.nev = nevInput;
+    this.eletkor = eletkorInput;
+    this.aktiv = aktivInput;
+  }
+  getNev() {
+    return this.nev;
+  }
+}
 
 
+----
+literál: közvetlenül megadott konkrét érték.
+pl. string literál:
+let szoveg1: string = "egykéthá";
+let szam: number = 42;
+
+literal type:
+let irany: "bal" | "jobb" | "előre" | "hátra"    //csak ezeket az értékeket veheti fel
 
 
+----
+type alias. pl.:
+type Nev = string;
+let nev: Nev = "Anna";  //tehát nem :string lesz, hanem :Nev a típus
 
+
+-----------------------------------------
 
