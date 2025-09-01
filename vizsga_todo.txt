@@ -266,8 +266,21 @@ első elem kiszedés a tömbből: cars.shift();    --> eredmény: "Saab"  illetv
 
 ------
 object:
-const car = {type: "Fiat", model: "500", weight: 850, driveable: true}
-const car = new Object({type: "Fiat", model: "500", weight: 850, driveable: true});
+const car = {
+  type: "Fiat", 
+  model: "500", 
+  weight: 850, 
+  isRunning: false,
+  car_start: function() {
+    if (!isRunning) {
+      this.isRunning = true;
+    }
+  }
+}
+car.car_start(); //az isRunning true lesz
+
+VAGY:
+const car = new Object({type: "Fiat", model: "500", weight: 850, isRunning: true});
 
 console.log(car.type) --> "Fiat"
 
@@ -525,3 +538,42 @@ submit – űrlap elküldése
 reset – űrlap visszaállítása
 change – beviteli elem értékének módosítása
 input – beírás input mezőbe (valós időben)
+
+---------------------------
+----------------------------
+OBJEKTUM (csak ez az egy van)
+const Felhasznalo_objektum = {
+  nev: "Anna",
+  kor: 25,
+  koszones: function() {
+    console.log(`Szia, ${this.nev}!`);
+  }
+};
+Felhasznalo_objektum.koszones(); // Szia, Anna
+
+-----------------------
+OSZTÁLY (példányosítható!)
+class ClassName {
+  name: string;
+  year: number;
+  isWorking: boolean;
+
+  constructor(name: string, year: number, working: boolean) {
+    this.name = name;
+    this.year = year;
+    this.isWorking = working;
+  }
+
+  status(): string {
+    let status = "";
+    if (isWorking) {
+      return "yes";
+    } else {
+      return "no";
+    }
+  }
+}
+
+const userobject1 = new ClassName("John", 28, true);
+const userobject2 = new ClassName("Rita", 36, false);
+
