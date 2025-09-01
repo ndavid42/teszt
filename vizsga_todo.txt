@@ -1,0 +1,227 @@
+1) gmail login (pw: ch....)
+2) github login (w/ gmail) [or pw: ch.....]
+3) vscode login (w/ github)
+4) vscode sync
+---
+
+
+
+
+
+
+
+=========
+BOOTSTRAP
+=========
+  xs   sm   md   lg    xl    xxl
+0   576  768  992  1200  1400
+
+bármi elem méret:
+.[w/h]-[25/50/75/100] - szélesség, magasság %
+
+.container  -  fő divre érdemes rátenni (max széles minden nézeten, de erre is rátehetők a -xs/sm...stb dolgok)
+.container-[xs/sm/md/lg/xl/xxl/fluid  -  fluid=sima .container, azaz 100% mindenhol
+.row  -  elemek egy sorba helyezése
+.col  -  oszlopok a soron belül
+.col-[1/2/3/4/6/12]  -  mennyi szélességet foglaljon el az oszlop (a 12-ből)
+.col-[xs/sm/md/lg/xl]-[1/2/3/4/6/12]  -  különböző nézetekben mennyit foglaljon el (reszpó)
+
+szöveg igazítás vizszintesen
+.text-start    .text-center    .text.end
+
+szöveg átalakítás
+.text-lowercase  .TEXT-UPPERCASE  .Text-Capitalize
+
+betűvastagság (FontWeight)
+.fw-light  .fw-normal  .fw-bold
+
+betűstílus (Font STyle)
+.fst-italic  .fst-normal
+
+szövegszínek
+.text-primary  .text-secondary  .text-success  .text-danger  .text-warning  .text-info  .text-light  .text-dark  .text-muted
+(kék)          (szürke)        (zöld)          (piros)       (sárga)        (v.kék)    (világos)     (sötét)     (halvány)
+
+szöveg deko
+.text-decoration-underline  .text-decoration-line-through  .text-decoration-none
+
+---
+Margin/Padding
+.m[t/b/l/r/x/y/nincs]-[0/1/2/3/4/5/auto]    pl.: .mb-3  .mx-auto
+.p[t/b/l/r/x/y/nincs]-[0/1/2/3/4/5]    pl.: .p-3  .px-5
+
+---------
+TABLE
+<caption><thead><tbody><tfoot>
+.table  - alap tábla
+.table-striped  -   csíkos
+.table-[bordered/borderless]  -  van border / nincs border
+.table-hover  -  hoverre sor kiemelés
+.table-sm  -  alacsonyabb sorok
+
+  tábla/sor, cella, fejléc színek: (halványabb színek)
+.table-[primary/secondary/success/danger/warning/info/light/dark]
+
+  cella színek: (erősebb színek)
+  .bg-[primary...dark]
+  
+reszponzív:
+.table-responsive-[sm/md/lg/xl]
+
+egyéb:
+.caption-top  -  caption felül lesz
+.align-middle  - vertical center
+.text-center  -  horizontal center
+
+-----------
+IMG
+.img-fluid  -  kép szélessége 100%, arányos
+.img-thumbnail  -  vékony lekerekített szegély
+.rounded[-top/-bottom/-left/-right]  -  lekerekítés
+.rounded-circle - körig/oválisig lekerekítés
+
+kép igazítás:
+.float-[start/end]
+.clearfix  -  lebegtetett képek után törjön a tartalom
+
+kép árnyék:
+  .shadow-[ / sm / lg]  -  árnyék alap / kicsi / nagy
+
+.placeholder  -  placeholder kép
+
+
+-----------
+BUTTON
+
+.btn  -  alap button
+.btn-[primary...dark]  -   színes gom
+.btn-outline-[primary...dark]  -  körvonalas gomb
+disabled  -  inaktív gomb (nem class! hanem egy boolean érték (= disabled=true)
+.btn-[sm/lg]  -  kicsi/nagy
+
+------
+FORM
+  <h1>Validálási beállítások, kinézetének beállítása</h1>
+  <form action="" style="width:500px; margin:0px auto;" class="needs-validation" novalidate>
+        <!--[needs-validation] bekapcsolja a validálási funkciót az adott formnál-->
+        <!--[novalidate] érték pedig kikapcsolja a böngésző alapértelmezett validálását, engedi a bootstrap validációt használni!-->
+        <div class="row">
+            <div class="col">
+                <!--[is-invalid] tulajdonsággal alapértelmezetten az invalid kinézetet adhatjuk a form elemünknek-->
+                <div class="form-group">
+                    <label for="vnev">Vezeték név:</label>
+                    <input type="text" name="vnev" id="vnev" class="form-control" required>
+                    <!--[is-invalid]-ot a classon belül kell megadni -->
+                    <div class="invalid-feedback">Hibás</div>
+                </div>
+            </div>
+            <div class="col">
+                <!--[is-valid] tulajdonsággal alapértelmezetten a valid kinézetet adhatjuk a form elemünknek-->
+                <div class="form-group">
+                    <label for="knev">Kereszt név:</label>
+                    <input type="text" name="knev" id="knev" class="form-control" required>
+                    <!--[is-valid]-ot a classon belül kell megadni -->
+                    <div class="valid-feedback">Megfelel</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fnev">Felhasználói név:</label>
+            <input type="text" name="fnev" id="fnev" class="form-control" required>
+            <small class="form-text text-muted">
+                <!--A small tag-ekre beállított szöveggel, alsó feliratot állíthatunk be a form elemnek-->
+                <!--Ezt az elemet a [form-text] tulajdonsággal formázza a bootstrap a megfelelőre-->
+                <!--A [text-muted] tulajdonság pedig az alapéretelmezetten fekete betűszínt cseréli szürkésre!-->
+                Megjegyzés szöveg, ami a form elem alatt jelenik meg.
+            </small>
+            <div class="invalid-feedback">Hibás</div>
+            <div class="valid-feedback">Megfelel</div>
+        </div>
+        <div class="form-group">
+            <label for="jsz">Jelszó:</label>
+            <input type="password" name="jsz" id="jsz" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="tanf">Tanfolyam típusa</label>
+            <select name="tanf" id="tanf" class="form-control"">
+            <option>Webfejlesztő</option>
+            <option>Junior frontend fejlesztő</option>
+        </select>
+        </div>
+        <div class=" form-check">
+                <label for="check" class="form-check-label">Felhasználói feltételek elfogadása</label>
+                <input type="checkbox" name="check" id="check" class="form-check-input" required>
+        </div>
+        <button type="submit">Küldés</button>
+        <!--Ha rajta hagyjuk a submit tulajdonságot, a gombon is végrehajtódik a bootstrap validáció-->
+        <!--A háttérben futó JS kódot a fájl végében találod meg-->
+
+    </form>
+
+ <h1>Lebegő címkék</h1>
+    <form action="" style="width:500px; margin:0px auto;" class="needs-validation" novalidate>
+        <div class="row">
+            <div class="col">
+                <!--A "lebegő címkékhez 3 dologra van szükségünk bootstrapnél"-->
+                <!--1. a [form-floating] osztály [form-group] helyett-->
+                <!--Arra hogy a mező rendelkezzen placeholder tulajdonsággal-->
+                <!--Illetve hogy a címkéket(label) ezúttal a mező után helyezzük el és ne elé-->
+                <!--Ha ezek közül a követelmények közül bármelyik is hiányzik, nem fog működni a lebegtetés-->
+                <div class="form-floating">
+                    <!--Az osztály az első szügséges összevető amivel jelezzük hogy itt most lebegtetni szeretnénk-->
+                    <input type="text" name="vnev" id="vnev" class="form-control" placeholder="Vezeték neved" required>
+                    <!--A működéshez szüksége a placeholder elemet is elhelyezni a form elemben-->
+                    <label for="vnev">Vezeték név:</label>
+                    <!--A címkét a mező után kell elhelyezni a helyes működéshez-->
+                    <div class="invalid-feedback">Hibás</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-floating">
+                    <!--Az osztály az első szügséges összevető amivel jelezzük hogy itt most lebegtetni szeretnénk-->
+
+                    <input type="text" name="knev" id="knev" class="form-control" placeholder="Keresztneved" required>
+                    <!--A működéshez szüksége a placeholder elemet is elhelyezni a form elemben-->
+                    <label for="knev">Kereszt név:</label>
+                    <!--A címkét a mező után kell elhelyezni a helyes működéshez-->
+                    <div class="valid-feedback">Megfelel</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-floating">
+            <!--Az osztály az első szügséges összevető amivel jelezzük hogy itt most lebegtetni szeretnénk-->
+            <input type="text" name="fnev" id="fnev" class="form-control" placeholder="Felhasználói név" required>
+            <!--A működéshez szüksége a placeholder elemet is elhelyezni a form elemben-->
+            <label for="fnev">Felhasználói név:</label>
+            <!--A címkét a mező után kell elhelyezni a helyes működéshez-->
+            <small class="form-text text-muted">
+                Megjegyzés szöveg, ami a form elem alatt jelenik meg.
+            </small>
+            <div class="invalid-feedback">Hibás</div>
+            <div class="valid-feedback">Megfelel</div>
+        </div>
+        <div class="form-floating">
+            <!--Az osztály az első szügséges összevető amivel jelezzük hogy itt most lebegtetni szeretnénk-->
+            <input type="password" name="jsz" id="jsz" class="form-control" placeholder="Jelszó" required>
+            <!--A működéshez szüksége a placeholder elemet is elhelyezni a form elemben-->
+            <label for="jsz">Jelszó:</label>
+        </div>
+        <div class="form-floating">
+            <!--Az osztály az első szügséges összevető amivel jelezzük hogy itt most lebegtetni szeretnénk-->
+            <select class="form-select" name="tanf" id="tanf" class="form-control"
+                aria-label="Floating label select example">
+                <option>Webfejlesztő</option>
+                <option>Junior frontend fejlesztő</option>
+            </select>
+            <label for="tanf">Tanfolyam típusa</label>
+            <!--A címkét a mező után kell elhelyezni a helyes működéshez-->
+        </div>
+        <button type="submit">Küldés</button>
+
+    </form>
+
+============
+ JAVASCRIPT
+============
+
+              
