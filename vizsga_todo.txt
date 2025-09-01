@@ -256,6 +256,12 @@ numeric sort:
 const points = [40, 100, 1, 5];
 points.sort()function(a, b){return a - b};
 
+új elem a tömb végére: cars.push("Audi");      --> eredmény nincs    illetve["Saab", "Fiat", "BMW", "Audi"]
+utolsó elem kiszedés a tömbből: cars.pop();    --> eredmény: "Audi"  illetve ["Saab", "Fiat", "BMW"]
+első elem kiszedés a tömbből: cars.shift();    --> eredmény: "Saab"  illetve ["Fiat", "BMW"]
+új elem a tömb elejére: cars.unshift("Lada");  --> eredmény: length  illetve ["Lada"; "Saab", "Fiat", "BMW"]
+
+
 ------
 object:
 const car = {type: "Fiat", model: "500", weight: 850, driveable: true}
@@ -290,6 +296,7 @@ eredmény 20 lesz
 
 ------
 class:
+js classes are templates for js objects
 
 class ClassName {
   constructor(name, year, working) {
@@ -312,3 +319,53 @@ const car1 = new ClassName("Ford", 2014, true);
 const car2 = new ClassName("Audi", 2020, false);
 
 console.log("working? " + car2.status());
+
+
+
+============
+ TYPESCRIPT
+============
+
+=js szuperszett
+transpiler
+típusbiztonság, erősen típusos
+
+-----
+telepítés: https://nodejs.org/en/
+teszt, h működik-e, terminálban (vs code legyen újraindítva): node -v
+teszt, h működik-e az NPM: npm -v
+  ha hiba!: powershell: Get-ExecutionPolicy --> ha restricted, akkor: Set-ExecutionPolicy RemoteSigned
+
+typescript telepítés: npm install -g typescript
+teszt, h felment-e: tsc -v
+
+.ts fájl lefordítása: tsc tesztfile.ts
+.ts fájl lefordítása folyamatos figyeléssel (watch): tsc tesztfile.ts -w
+
+(jquery használata ts-sel: npm i @types/jquery --save-dev
+aztán hivatkozás a jquery file-ban a saját js hivatkozások előtt)
+
+TS tesztelő felület: https://www.typescriptlang.org/play/
+
+-----
+
+változó név: nem lehet benne SPACE. nem kezdődhet számmal. kezdődhet _ vagy $ karakterrel, ezek lehetnek máshol is
+let valtozoNev: string = "érték";
+let valtozoMasikNev: number = 2;
+let valtozoHarmadikNev: boolean = false;
+let valtozoNegyedikNev: any = "akármi lehet, mint a js-ben";
+let valtozoOtodikNev: unknown = "dettó, csak ez kényszerít a használat előtti típusellenőrzésre"; (akkor jó, ha nem tudjuk biztosan, h milyen adat érkezik, de kell a típusvédelem) typeof vagy as string/as number konvertálás utána használható
+let email: string | null = null; //jelenleg nincs érték, adat egyelőre nincs betöltve
+
+----
+tömbök:
+
+let szovegesTomb: string[] = ["egy", "kettő", "három"];
+let szamTomb. Array<number> = [512, 64, 42, 51];
+
+
+
+
+
+
+
