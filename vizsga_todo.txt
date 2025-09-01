@@ -460,5 +460,68 @@ type Nev = string;
 let nev: Nev = "Anna";  //tehát nem :string lesz, hanem :Nev a típus
 
 
------------------------------------------
+----------------DOM-------------------------
+Típusmegadás:
 
+>>>generikus
+const inputElem = document.querySelector<HTMLInputElement>('#szamInput');     - iztonságosabb és ajánlottabb módszer (generic type annotation)
+
+>>>>típus-kényszerítés
+const inputElem = document.querySelector("#szamInput") as HTMLInputElement;     - nincs ellenőrzés, nem garantált (type cast/assertion)
+
+HTML elem TypeScript típusa
+<input>      HTMLInputElement
+<form>       HTMLFormElement
+<select>     HTMLSelectElement
+<textarea>   HTMLTextAreaElement
+<button>     HTMLButtonElement
+<a> (link)   HTMLAnchorElement
+<img>        HTMLImageElement
+<video>      HTMLVideoElement
+<audio>      HTMLAudioElement
+<label>      HTMLLabelElement
+<table>      HTMLTableElement
+<tr>         HTMLTableRowElement
+<td> / <th>  HTMLTableCellElement
+<div>        HTMLDivElement
+<span>       HTMLSpanElement
+<canvas>     HTMLCanvasElement
+<ul> / <ol>  HTMLUListElement / HTMLOListElement
+<li>         HTMLLIElemen
+
+
+----
+gomb?.addEventListener('click', () => {...});    //csak akkor hívja meg, ha a gomb nem null v undefined. nem garantálja h az eseménykezelő mindig hozzárendelődik
+gomb!.addEventListener('click', () => {...});    //ha biztosan tudjuk, h nem null v undefined (akkor érdemes használni, ha tuti ott van az elem)
+if(!gomb) {console.error("hiba"!); return;}      //teljes kontroll, biztonságos
+
+gomb?.addEventListener('click', (event: MouseEvent) => { console.log("kattintás történt") });
+
+nem arrow funkcióval:
+const gomb = document.querySelector<HTMLButtonElement>('#kuldesGomb');
+function kattintasKezelo(event: MouseEvent): void {
+  alert('Kattintottál a gombra!');
+}
+// esemény regisztrálása
+gomb?.addEventListener('click', kattintasKezelo);
+
+MOUSEEVENT
+click – kattintás
+dblclick – dupla kattintás
+mousedown – egérgomb lenyomása
+mouseup – egérgomb felengedése
+mousemove – egér mozgatása
+mouseover – egér rámegy egy elemre
+mouseout – egér elhagyja az elemet
+contextmenu – jobb klikk (helyi menü)
+
+KEYBOARDEVENT
+keydown – billentyű lenyomása
+keyup – billentyű felengedése
+keypress – (elavult, inkább ne használd)
+
+SUBMITEVENT VAGY EVENT
+submit – űrlap elküldése
+reset – űrlap visszaállítása
+change – beviteli elem értékének módosítása
+input – beírás input mezőbe (valós időben)
