@@ -6,10 +6,10 @@
 
 
 
-
+background-image: linear-gradient(black, gray, black);
 
 #          BOOTSTRAP
-
+```
   xs   sm   md   lg    xl    xxl
 0   576  768  992  1200  1400
 
@@ -41,14 +41,16 @@ szövegszínek
 
 szöveg deko
 .text-decoration-underline  .text-decoration-line-through  .text-decoration-none
-
+```
 ---
 Margin/Padding
+```
 .m[t/b/l/r/x/y/nincs]-[0/1/2/3/4/5/auto]    pl.: .mb-3  .mx-auto
 .p[t/b/l/r/x/y/nincs]-[0/1/2/3/4/5]    pl.: .p-3  .px-5
-
+```
 ---------
 TABLE
+```
 <caption><thead><tbody><tfoot>
 .table  - alap tábla
 .table-striped  -   csíkos
@@ -69,9 +71,10 @@ egyéb:
 .caption-top  -  caption felül lesz
 .align-middle  - vertical center
 .text-center  -  horizontal center
-
------------
+```
+---
 IMG
+```
 .img-fluid  -  kép szélessége 100%, arányos
 .img-thumbnail  -  vékony lekerekített szegély
 .rounded[-top/-bottom/-left/-right]  -  lekerekítés
@@ -85,17 +88,17 @@ kép árnyék:
   .shadow-[ / sm / lg]  -  árnyék alap / kicsi / nagy
 
 .placeholder  -  placeholder kép
-
+```
 
 -----------
 BUTTON
-
+```
 .btn  -  alap button
 .btn-[primary...dark]  -   színes gom
 .btn-outline-[primary...dark]  -  körvonalas gomb
 disabled  -  inaktív gomb (nem class! hanem egy boolean érték (= disabled=true)
 .btn-[sm/lg]  -  kicsi/nagy
-
+```
 ------
 FORM
 ```html
@@ -218,14 +221,14 @@ FORM
 
     </form>
 ```
-====================================
+===
               JAVASCRIPT
-====================================
-
+===
+```
 var  -  global scope (nem redeklarálható, pláne mert mindenhol elérhető, blokkon belül is)
 let  -  block scope (redeklarálható más blokkon belül, mivel csak oda terjed ki a hatása)
 const   -  konstans (nem redeklarálható, hiszen konstans)
-
+```
 szövegbe ágyazott változó: console.log(`balra dőlő aposztrófok között ${valtozoNeve} ez egy változó`);
 
 -------
@@ -342,14 +345,14 @@ console.log("working? " + car2.status());
 ```
 
 
-================================
-           TYPESCRIPT
-================================
+===
+#TYPESCRIPT
+===
 
 =js szuperszett
 transpiler
 típusbiztonság, erősen típusos
-
+```
 -----
 telepítés: https://nodejs.org/en/
 teszt, h működik-e, terminálban (vs code legyen újraindítva): node -v
@@ -368,6 +371,7 @@ aztán hivatkozás a jquery file-ban a saját js hivatkozások előtt)
 TS tesztelő felület: https://www.typescriptlang.org/play/
 
 -----
+```
 
 változó név: nem lehet benne SPACE. nem kezdődhet számmal. kezdődhet _ vagy $ karakterrel, ezek lehetnek máshol is
 ```typecript
@@ -702,7 +706,8 @@ export class KOMPONENS {
 		"egyikNév;3,8",
 		"masikNév;5,2"	
 	]
-	
+
+//lehet minden FifaElem is! azaz class. nem kell interfaceként
 	objektumFeltolto(feltoltendoElem: string[]): FifaAdat[] {
 		let beolvasottAdatok: FifaAdat[] = [];
 		for (let i: number = 0; i < feltoltendoElem.length; i++) {
