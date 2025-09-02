@@ -599,6 +599,12 @@ const userobject2 = new ClassName("Rita", 36, false);
 ======================
         ANGULAR
 ======================
+telepítés:
+npm install -g @angular/cli
+
+verzió csekkolás:
+ng v
+
 
 **TERMINÁL
 > ng new PROJEKTNEVE --no-standalone			(ng = aNGular)
@@ -612,7 +618,7 @@ ha kész:
 
 **bootstrap importálása az angular.json-be:
 "styles: [
-	"./node_modules/bootstrap/dist/css/bootstrap.css",
+	"./node_modules/bootstrap/dist/css/bootstrap.css",     (VAGY SIMÁN node_modules/bootstrap...)
 	"src/styles.css"
 ],
 
@@ -622,10 +628,6 @@ ha kész:
 > ng g c MÁSIKKOMPONENS
 > ng g c HIBA
 
-
-----
-**lehet futtatni a teszteléshez:
-> ng serve --open								(szerver indítása, meg is nyitja)
 
 ----
 
@@ -668,6 +670,11 @@ elemek hozzárendelése a navigációs sávba:
 <a class="nav-link" href="#" routerLink="/masikkomponens">MÁSIKKOMPONENS</a>
 <a class="nav-link" href="#" routerLink="/hiba">Hiba</a>
 ```
+
+----
+**lehet futtatni a teszteléshez:
+> ng serve --open								(szerver indítása, meg is nyitja)
+
 
 ---- ---- ---- ---- ---- ---- ----
 előkészítés kész!
@@ -852,3 +859,32 @@ function LegtobbNyeremeny(vizsgaltObjektum: snookerElem[]): number {
 
 }
 ```
+===
+DATA BINDING
+```
+{{expression}}
+FE<-------BE interpolation: egyszerű hivatkozás. a komponensben lévő elem értékét jelenítjük meg a DOM felületén
+BE:		let szoveg: string = "brekk"
+FE:		<p>{{szoveg}}</p>
+
+[property] = "expression"
+FE<-------BE one way binding: tulajdonság hivatkozás. komponensben lévő adatot húzunk a DOM-os tulajdonságba
+BE:		let webcim_url: string = "http://www.brekk.hu";
+FE:		<a [href]="webcim_url" target="_blank">brekk</a>
+
+(event) = "statement"
+FE-------->BE event binding: események kezelése. DOM eseményekre reagálva hajtunk végre vmit a komponensen, pl. klikk, mozgás
+BE:		uzenet(): void { alert("klikkeléskor ez fut le"); }
+FE:		<button type="button" (click)="uzenet()">alertet kiváltó gomb</button>
+
+[(ngModel)] = "property"
+FE<-------->BE two way binding: kétirányú kötés, DOM-ban módosított érték módosul a komponensben is és viszont.
+BE:		a_Oldal: number = 2;
+FE:		<input type="number" id="a_Oldal" [(ngModel)]="a_Oldal">
+		<p>a négyzet oldalának mérete: {{a_Oldal}}</p>			//ez már ugye egy egyszerű hivatkozás 
+```
+Űrlapok esetén kell a FormsModule (app.module.ts-be kell importálni)
+
+tömb értékeit kilistázni:
+BE:		eredmenyek: string[] = [];
+FE:		<ul><li *ngFor="let adatsor of eredmenyek">{{adatsor}}</li></ul>
