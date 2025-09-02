@@ -8,11 +8,8 @@
 
 
 
+#          BOOTSTRAP
 
-
-==========================
-          BOOTSTRAP
-==========================
   xs   sm   md   lg    xl    xxl
 0   576  768  992  1200  1400
 
@@ -101,6 +98,7 @@ disabled  -  inaktív gomb (nem class! hanem egy boolean érték (= disabled=tru
 
 ------
 FORM
+```html
   <h1>Validálási beállítások, kinézetének beállítása</h1>
   <form action="" style="width:500px; margin:0px auto;" class="needs-validation" novalidate>
         <!--[needs-validation] bekapcsolja a validálási funkciót az adott formnál-->
@@ -219,7 +217,7 @@ FORM
         <button type="submit">Küldés</button>
 
     </form>
-
+```
 ====================================
               JAVASCRIPT
 ====================================
@@ -232,7 +230,7 @@ szövegbe ágyazott változó: console.log(`balra dőlő aposztrófok között $
 
 -------
 loop:
-
+```javascript
 for(let i = 0; i < 5; i++) {
   console.log(i);
 }
@@ -248,25 +246,27 @@ do {
   console.log(i)
   i++;
 } while (i < 5)
-
+```
 -------
 array:
-
+```javascript
 const cars = ["Saab", "Fiat", "BMW"];
 const cars = new Array("Saab", "Fiat", "BMW");
 
 numeric sort:
 const points = [40, 100, 1, 5];
 points.sort()function(a, b){return a - b};
-
-új elem a tömb végére: cars.push("Audi");      --> eredmény nincs    illetve["Saab", "Fiat", "BMW", "Audi"]
-utolsó elem kiszedés a tömbből: cars.pop();    --> eredmény: "Audi"  illetve ["Saab", "Fiat", "BMW"]
-első elem kiszedés a tömbből: cars.shift();    --> eredmény: "Saab"  illetve ["Fiat", "BMW"]
-új elem a tömb elejére: cars.unshift("Lada");  --> eredmény: length  illetve ["Lada"; "Saab", "Fiat", "BMW"]
-
+```
+```javacript
+új elem a tömb végére: cars.push("Audi");      // eredmény nincs    illetve["Saab", "Fiat", "BMW", "Audi"]
+utolsó elem kiszedés a tömbből: cars.pop();    // eredmény: "Audi"  illetve ["Saab", "Fiat", "BMW"]
+első elem kiszedés a tömbből: cars.shift();    // eredmény: "Saab"  illetve ["Fiat", "BMW"]
+új elem a tömb elejére: cars.unshift("Lada");  // eredmény: length  illetve ["Lada"; "Saab", "Fiat", "BMW"]
+```
 
 ------
 object:
+```javascript
 const car = {
   type: "Fiat", 
   model: "500", 
@@ -279,13 +279,15 @@ const car = {
   }
 }
 car.car_start(); //az isRunning true lesz
-
+```
 VAGY:
+```javascript
 const car = new Object({type: "Fiat", model: "500", weight: 850, isRunning: true});
 
 console.log(car.type) --> "Fiat"
-
+```
 constructor:
+```javascript
 function Person(first, last, age, active) {
   this.firstName = first;
   this.lastName = last;
@@ -302,18 +304,20 @@ const worker2 = new Person("Lara", "Croft", 30, false);
 
 worker2.isActive = true;
 console.log(worker2.getFullName());
-
+```
 -----
 arrow:
+```javascript
 myFunction = (a, b) => a * b;
 let result = myFunction(4, 5);
+```
 eredmény 20 lesz
 
 
 ------
 class:
 js classes are templates for js objects
-
+```javascript
 class ClassName {
   constructor(name, year, working) {
     this.name = name;
@@ -335,7 +339,7 @@ const car1 = new ClassName("Ford", 2014, true);
 const car2 = new ClassName("Audi", 2020, false);
 
 console.log("working? " + car2.status());
-
+```
 
 
 ================================
@@ -366,6 +370,7 @@ TS tesztelő felület: https://www.typescriptlang.org/play/
 -----
 
 változó név: nem lehet benne SPACE. nem kezdődhet számmal. kezdődhet _ vagy $ karakterrel, ezek lehetnek máshol is
+```typecript
 let valtozoNev: string = "érték";
 let valtozoMasikNev: number = 2;
 let valtozoHarmadikNev: boolean = false;
@@ -374,14 +379,14 @@ let valtozoOtodikNev: unknown = "dettó, csak ez kényszerít a használat előt
 let email: string | null = null; //jelenleg nincs érték, adat egyelőre nincs betöltve
 
 let valasz: string | number; //union típus, elfogadja mindkettőt. használat előtt typeof típusellenőrzés!)
-
+```
 
 ----
 tömbök:
-
+```typecript
 let szovegesTomb: string[] = ["egy", "kettő", "három"];
 let szamTomb. Array<number> = [512, 64, 42, 51];
-
+```
 -----
 függvények:
 
@@ -396,18 +401,21 @@ param default értékkel:        function funkcioNeve(nev: string = "John Doe"):
 soha nincs visszatérés:        function funkcioNeve(nev: string): never { throw new Error(msg); }
 
 arrow:
+```typecript
 const osszead = (a: number, b: number): number => { return a+b; };
-
+```
 ----
 tuple: rögzített elemszámú és típuskiosztású tömb
+```typecript
 let user: [string, number] = ["anna", 23];
 let data: [string, number?];  //a number az opcionális
 let data: [string | number, boolean]; //többféle típus egy indexen
-
+```
 -----
 enum: felsorolás, előre meghatározott név-érték párok. van numeric és string enum
 
->>>numeric enum:
+>numeric enum:
+```typecript
 enum Status {
   OK,
   Warning,
@@ -415,8 +423,9 @@ enum Status {
 }
 console.log(Status.Warning); //eredménye: 1
 console.log(Status[1]);   //eredménye: "Warning"
-
->>>string enum: (ha fontosabb az olvashatóság
+```
+>string enum: (ha fontosabb az olvashatóság
+```typecript
 enum UserTipus {
   Admin = "admin",
   User = "user",
@@ -427,10 +436,10 @@ console.log(alap_felhasznalo); // "user"
 
 let rendszergazda: UserTipus = UserTipus.Admin; 
 console.log(rendszergazda); // "admin"
-
------
+```
+---
 interface: minta (szabályrendszer), ami meghatározza az objektum szerkezetét (milyen mezők, azok milyen tipusúak, milyen metódusok tartoznak hozzá)
-
+```typecript
 interface Dolgozo { 
   nev: string; 
   eletkor: number; 
@@ -441,8 +450,9 @@ interface Dolgozo {
 
 var interfaceObjektum1: Dolgozo = {nev: "Teszt Elek", eletkor: 30, aktiv: true};
 console.log(interfaceObjektum1.nev);
-
+```
 interface és osztály:
+```typecript
 class HR_munkatars implements Dolgozo {
   nev: string;
   eletkor: number;
@@ -456,7 +466,7 @@ class HR_munkatars implements Dolgozo {
     return this.nev;
   }
 }
-
+```
 
 ----
 literál: közvetlenül megadott konkrét érték.
@@ -473,17 +483,18 @@ type alias. pl.:
 type Nev = string;
 let nev: Nev = "Anna";  //tehát nem :string lesz, hanem :Nev a típus
 
-
-----------------DOM-------------------------
+===
+## DOM
 Típusmegadás:
 
->>>generikus
+-generikus
 const inputElem = document.querySelector<HTMLInputElement>('#szamInput');     - iztonságosabb és ajánlottabb módszer (generic type annotation)
 
->>>>típus-kényszerítés
+-típus-kényszerítés
 const inputElem = document.querySelector("#szamInput") as HTMLInputElement;     - nincs ellenőrzés, nem garantált (type cast/assertion)
 
 HTML elem TypeScript típusa
+```
 <input>      HTMLInputElement
 <form>       HTMLFormElement
 <select>     HTMLSelectElement
@@ -502,14 +513,16 @@ HTML elem TypeScript típusa
 <canvas>     HTMLCanvasElement
 <ul> / <ol>  HTMLUListElement / HTMLOListElement
 <li>         HTMLLIElemen
-
+```
 
 ----
+```javascript
 gomb?.addEventListener('click', () => {...});    //csak akkor hívja meg, ha a gomb nem null v undefined. nem garantálja h az eseménykezelő mindig hozzárendelődik
 gomb!.addEventListener('click', () => {...});    //ha biztosan tudjuk, h nem null v undefined (akkor érdemes használni, ha tuti ott van az elem)
 if(!gomb) {console.error("hiba"!); return;}      //teljes kontroll, biztonságos
 
 gomb?.addEventListener('click', (event: MouseEvent) => { console.log("kattintás történt") });
+```
 
 nem arrow funkcióval:
 const gomb = document.querySelector<HTMLButtonElement>('#kuldesGomb');
@@ -518,7 +531,7 @@ function kattintasKezelo(event: MouseEvent): void {
 }
 // esemény regisztrálása
 gomb?.addEventListener('click', kattintasKezelo);
-
+```
 MOUSEEVENT
 click – kattintás
 dblclick – dupla kattintás
@@ -532,14 +545,13 @@ contextmenu – jobb klikk (helyi menü)
 KEYBOARDEVENT
 keydown – billentyű lenyomása
 keyup – billentyű felengedése
-keypress – (elavult, inkább ne használd)
 
 SUBMITEVENT VAGY EVENT
 submit – űrlap elküldése
 reset – űrlap visszaállítása
 change – beviteli elem értékének módosítása
 input – beírás input mezőbe (valós időben)
-
+```
 ---------------------------
 ----------------------------
 OBJEKTUM (csak ez az egy van)
@@ -554,6 +566,7 @@ Felhasznalo_objektum.koszones(); // Szia, Anna
 
 -----------------------
 OSZTÁLY (példányosítható!)
+```javascript
 class ClassName {
   name: string;
   year: number;
@@ -577,7 +590,7 @@ class ClassName {
 
 const userobject1 = new ClassName("John", 28, true);
 const userobject2 = new ClassName("Rita", 36, false);
-
+```
 
 ======================
         ANGULAR
@@ -615,18 +628,23 @@ ha kész:
 **src/app/app.html:
 ki lehet üríteni, csak a router-outlet maradjon (ide kerülhet az a kontent, ami minden oldalon meg fog jelenni.
 így a bootstrapes cuccok is rendezve vannak:
+```html
 <div class="container">
 	<router-outlet />
 </div>
+```
 
 **src/app/app-module.ts:
+```typecript
 imports: [
 	BrowserModule,
 	AppRoutingModule,
 	FormsModule
 ],
+```
 
 **src/app/app-routing-module.ts:
+```typecript
 const routes: Routes = [
   {path: "valasztasok", component: Valasztasok},
   {path: "hiba", component: Hiba},
@@ -634,22 +652,26 @@ const routes: Routes = [
   {path: "", redirectTo: "valasztasok", pathMatch: "full"},
   {path: "**", component: Hiba}
 ];
+```
 
 **hiba.html-be
 elég egy alert
 
 
 elemek hozzárendelése a navigációs sávba:
+```html
 <a class="nav-link" href="#" routerLink="/valasztasok">LINK NEVE</a>
 <a class="nav-link" href="#" routerLink="/masikkomponens">MÁSIKKOMPONENS</a>
 <a class="nav-link" href="#" routerLink="/hiba">Hiba</a>
+```
 
 ---- ---- ---- ---- ---- ---- ----
 előkészítés kész!
 ---- ---- ---- ---- ---- ---- ----
+
 **komponensen belül:
 KOMPONENSNEVE1\KOMPONENS.ts
-
+```typecript
 @Component({
 
 })
@@ -723,13 +745,14 @@ class FifaElem implements FifaAdat {
 		this.masikszam = masikszam;
 	}
 }
-
+```
 
 ----
 **HTML
 KOMPONENSNEVE1\KOMPONENS.html
 
 **adatok feltöltése
+```html
 <div class="form-group">
     <label for="nevInput">Név</label>
     <input type="text" class="form-control" [(ngModel)]="nevInput" id="nevInput">
@@ -743,11 +766,15 @@ KOMPONENSNEVE1\KOMPONENS.html
     <input type="number" class="form-control" [(ngModel)]="masikszamInput" id="masikszamInput">
 </div>
 <button class="btn btn-success w-100 my-3" (click)="Mentes()">Adatok mentése</button>
+```
 
 **adatok szűrése:
+```html
 <input type="text" class="form-control mb-5" [(ngModel)]="kereso" placeholder="Keresés...">
+```
 
 **adatok megjelenítése
+```html
 <table class="table table-success table-striped table-sm table-bordered table-hover">
 	<thead>
 		<tr>
@@ -766,7 +793,7 @@ KOMPONENSNEVE1\KOMPONENS.html
 </table>
 
 
-//HA KELL SZŰRÉS:
+<!--HA KELL SZŰRÉS:-->
 		<tr *ngFor="let adatok of fifaadatok">
 			<ng-container *ngIf="szures(adatok)">
 				<td>{{adatok.nev}}</td>
@@ -775,4 +802,4 @@ KOMPONENSNEVE1\KOMPONENS.html
 			</ng-container>
 
 		</tr>
-
+```
