@@ -808,3 +808,47 @@ KOMPONENSNEVE1\KOMPONENS.html
 
 		</tr>
 ```
+
+
+---
+adat tömb feldolgozás interface-szel
+
+```typescript
+var snookerInfo: string[] = ["52;Akani Sunny;Thaiföld;118500",
+							"38;Zhou Yuelong;Kína;150250",
+							]
+
+interface snookerElem {
+    helyezes: string;
+    nev: string;
+    orszag: string;
+    nyeremeny: number;
+}
+
+function Objektumfeltolto(feltoltendoElem: string[]): snookerElem[] {
+    var beolvasottAdatok: snookerElem[] = [];
+    for (let i: number = 0; i < feltoltendoElem.length; i++) {
+        let darabolandoSor: string[] = feltoltendoElem[i].split(";");
+        let objektum: snookerElem = {
+            helyezes: darabolandoSor[0],
+            nev: darabolandoSor[1],
+            orszag: darabolandoSor[2],
+            nyeremeny: Number(darabolandoSor[3])
+        };
+        beolvasottAdatok.push(objektum);
+    }
+    return beolvasottAdatok;
+}
+var snookerAdatok: snookerElem[] = Objektumfeltolto(snookerInfo);
+
+function LegtobbNyeremeny(vizsgaltObjektum: snookerElem[]): number {
+    var maxNyeremeny: number = vizsgaltObjektum[0].nyeremeny;
+    for (let i: number = 0; i < vizsgaltObjektum.length; i++) {
+        if (vizsgaltObjektum[i].nyeremeny > maxNyeremeny) {
+            maxNyeremeny = vizsgaltObjektum[i].nyeremeny;
+        }
+    }
+    return maxNyeremeny;
+
+}
+```
