@@ -1,0 +1,117 @@
+"npm install -g @angular/cli"
+
+
+
+"ng new vizsga"
+
+
+
+vizsga mappába belépni
+
+
+
+"ng g c vizsgafeladat"
+
+
+
+app.component.html állomány utolsó sorát meghagyni többit törölni
+
+
+
+"npm install bootstrap"
+
+
+
+BOOTSTRAP IMPORT - styles.css 
+@import "~bootstrap/dist/css/bootstrap.css";
+
+
+
+FORM HASZNÁLAT MIATT - app.module.ts
+import { FormsModule } from '@angular/forms';
+FormsModule
+
+
+
+ROUTING MODUL: - app-routing.module.ts
+const routes: Routes = [
+  { path: "vizsgafeladat", component: VizsgafeladatComponent },//Ha beírom megoldás, akkor a vizsga megoldására ugrik
+  { path: "", redirectTo: "/vizsgafeladat", pathMatch: "full" },//Ha üresen hagyom az útvonal nevét akkor is
+  { path: "**", component: VizsgafeladatComponent }//Vagy ha bármi mást írok be akkor is
+];
+
+
+//BACKEND RÉSZ - vizsgafeladat.component.ts
+export class VizsgafeladatComponent {
+
+  htmlModul!: number;
+  bootstrapModul!: number;
+  javaScriptModul!: number;
+  typeScriptModul!: number;
+  angularModul!: number;
+  serverModul!: number;
+
+  osszpontszam!: number;
+
+  EredmenyMentes() {
+    if (this.htmlModul == null || this.bootstrapModul == null || this.javaScriptModul == null || this.typeScriptModul == null || this.angularModul == null || this.serverModul == null) {
+      alert("Az összes mező kitöltése kötelező!");
+    }
+    else {
+      this.osszpontszam = this.htmlModul + this.bootstrapModul + this.javaScriptModul + this.typeScriptModul + this.angularModul + this.serverModul;
+      if (this.osszpontszam < 50) {
+        this.megoldasok.push("Sikertelen vizsga, szerzett pont: " + this.osszpontszam);
+      }
+      else if (this.osszpontszam < 60) {
+        this.megoldasok.push("Sikeres vizsga (2-es), szerzett pont: " + this.osszpontszam);
+      }
+      else if (this.osszpontszam < 70) {
+        this.megoldasok.push("Sikeres vizsga (3-as), szerzett pont: " + this.osszpontszam);
+      }
+      else if (this.osszpontszam < 80) {
+        this.megoldasok.push("Sikeres vizsga (4-es), szerzett pont: " + this.osszpontszam);
+      }
+      else {
+        this.megoldasok.push("Sikeres vizsga (5-ös), szerzett pont: " + this.osszpontszam);
+      }
+    }
+  }
+
+  megoldasok: string[] = [];
+}
+
+
+
+
+
+<!--FRONTEND RÉSZ -  vizsgafeladat.components.html-->
+<div class="container">
+    <h2>Angular modul megoldása</h2>
+    <label for="htmlInput">HTML modul pontszáma:</label>
+    <input type="number" class="form-control" id="htmlInput" [(ngModel)]="htmlModul">
+
+    <label for="bootstrapInput">Bootstrap modul pontszáma:</label>
+    <input type="number" class="form-control" id="bootstrapInput" [(ngModel)]="bootstrapModul">
+
+    <label for="javaScriptInput">JavaScript modul pontszáma:</label>
+    <input type="number" class="form-control" id="javaScriptInput" [(ngModel)]="javaScriptModul">
+
+    <label for="typeScriptInput">TypeScript modul pontszáma:</label>
+    <input type="number" class="form-control" id="typeScriptInput" [(ngModel)]="typeScriptModul">
+
+    <label for="angularInput">Angular modul pontszáma:</label>
+    <input type="number" class="form-control" id="angularInput" [(ngModel)]="angularModul">
+
+    <label for="serverInput">Szerver modul pontszáma:</label>
+    <input type="number" class="form-control" id="serverInput" [(ngModel)]="serverModul">
+
+    <button type="button" class="btn btn-success form-control mt-3" (click)="EredmenyMentes()">Eredmény mentése</button>
+    <p>A vizsgán szerzett feladatok összpontszáma:
+        {{htmlModul+bootstrapModul+javaScriptModul+typeScriptModul+angularModul+serverModul}}</p>
+
+    <ul>
+        <li *ngFor="let eredmenyek of megoldasok">
+            {{eredmenyek}}
+        </li>
+    </ul>
+</div>
