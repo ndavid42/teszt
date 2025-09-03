@@ -739,6 +739,7 @@ export class KOMPONENS {
 	}
 }
 
+//AZ INTERFACE AZ EXPORT CLASSON KÍVÜL LEGYEN
 interface FifaAdat {
 	nev: string;
 	szam: number;
@@ -846,7 +847,7 @@ function Objektumfeltolto(feltoltendoElem: string[]): snookerElem[] {
     }
     return beolvasottAdatok;
 }
-var snookerAdatok: snookerElem[] = Objektumfeltolto(snookerInfo);
+var snookerAdatok: snookerElem[] = this.Objektumfeltolto(this.snookerInfo);
 
 function LegtobbNyeremeny(vizsgaltObjektum: snookerElem[]): number {
     var maxNyeremeny: number = vizsgaltObjektum[0].nyeremeny;
@@ -886,5 +887,118 @@ FE:		<input type="number" id="a_Oldal" [(ngModel)]="a_Oldal">
 Űrlapok esetén kell a FormsModule (app.module.ts-be kell importálni)
 
 tömb értékeit kilistázni:
+```
 BE:		eredmenyek: string[] = [];
 FE:		<ul><li *ngFor="let adatsor of eredmenyek">{{adatsor}}</li></ul>
+```
+
+
+---
+===
+még egy feltöltő
+
+```
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-kektura',
+  templateUrl: './kektura.component.html',
+  styleUrls: ['./kektura.component.css']
+})
+export class KekturaComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  kektura: string[] = [
+    "Sumeg, vasutallomas;Sumeg, buszpalyaudvar;1,208;16;6;n",
+    "Sumeg, buszpalyaudvar;Mogyorosi-domb, geologiai bemutatohely;1,512;24;8;n",
+    "Mogyorosi-domb, geologiai bemutatohely;Sumegi bazaltbanya vasutallomas;1,576;13;43;n"
+  ];
+
+  ObjektumFeltolto(feltoltendoElem: string[]): turaSzakasz[] {
+    var beolvasottAdatok: turaSzakasz[] = [];
+    for (let i: number = 0; i < feltoltendoElem.length; i++) {
+      let elemDarabok: string[] = feltoltendoElem[i].split(";");
+      let objektum: turaSzakasz = {
+        kiinduloPont: elemDarabok[0],
+        vegPont: elemDarabok[1],
+        szakaszHossza: Number(elemDarabok[2].replace(",", ".")),
+        emelkedes: Number(elemDarabok[3]),
+        lejtes: Number(elemDarabok[4]),
+        pecsetelohelyE: elemDarabok[5]
+      }
+      beolvasottAdatok.push(objektum);
+    }
+    return beolvasottAdatok;
+  }
+
+  megjelenitendoAdatok: turaSzakasz[] = this.ObjektumFeltolto(this.kektura);
+
+  kiinduloPontNeve!: string;
+  vegPontNeve!: string;
+  szakaszHossz!: number;
+  emelkedesMerteke!: number;
+  lejtesMerteke!: number;
+  pecseteloHelyInfo!: string;
+
+  UjAdatok(): void {
+    if (this.kiinduloPontNeve != null && this.vegPontNeve != null && this.szakaszHossz != null && this.emelkedesMerteke != null && this.lejtesMerteke != null && this.pecseteloHelyInfo != null) {
+      let ujAdat: turaSzakasz = {
+        kiinduloPont: this.kiinduloPontNeve,
+        vegPont: this.vegPontNeve,
+        szakaszHossza: this.szakaszHossz,
+        emelkedes: this.emelkedesMerteke,
+        lejtes: this.lejtesMerteke,
+        pecsetelohelyE: this.pecseteloHelyInfo
+      }
+      this.megjelenitendoAdatok.push(ujAdat);
+    }
+    else {
+      alert("Hiányzó adat!");
+    }
+  }
+}
+
+export interface turaSzakasz {
+  kiinduloPont: string;
+  vegPont: string;
+  szakaszHossza: number;
+  emelkedes: number;
+  lejtes: number;
+  pecsetelohelyE: string;
+}
+
+---
+
+<div class="form-group">
+        <label for="kiinduloPontNeve">Kiindulópont neve</label>
+        <input type="text" id="kiinduloPontNeve" [(ngModel)]="kiinduloPontNeve" class="form-control">
+</div>
+<button type="button" class="btn btn-dark form-control mb-3 mt-3" (click)="UjAdatok()"> Adatok feltöltése</button>
+
+ <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Kiindulópont neve</th>
+                <th>Végpont neve</th>
+                <th>Túraszakasz hossza</th>
+                <th>Emelkedés</th>
+                <th>Lejtés</th>
+                <th>Pecsételőhely-e?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let szakaszAdatok of megjelenitendoAdatok">
+                <td>{{szakaszAdatok.kiinduloPont}}</td>
+                <td>{{szakaszAdatok.vegPont}}</td>
+                <td>{{szakaszAdatok.szakaszHossza}}</td>
+                <td>{{szakaszAdatok.emelkedes}}</td>
+                <td>{{szakaszAdatok.lejtes}}</td>
+                <td>{{szakaszAdatok.pecsetelohelyE}}</td>
+            </tr>
+        </tbody>
+    </table>
+```
